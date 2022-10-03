@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import { IUser } from './models/IUser'
 
 function Home() {
@@ -64,6 +65,11 @@ function Home() {
 
   return (
     <div>
+
+        <div>
+          <NavLink to='/'>Home</NavLink> | <NavLink to='/product'>Product</NavLink> | <NavLink to='/settings'>Settings</NavLink>
+        </div>
+
         <h3> { user.name + ' ' + user.surname } </h3>
         <h2> { user1.email + ' ' + user1.age } </h2>
         

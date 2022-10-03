@@ -56,6 +56,12 @@ function Home() {
       status: true
   }
 
+  // html5 form send
+  const sendForm = (evt:React.FormEvent) => {
+    evt.preventDefault()
+    console.log( email, password );
+  }
+
   return (
     <div>
         <h3> { user.name + ' ' + user.surname } </h3>
@@ -71,6 +77,15 @@ function Home() {
 
         <h2> { email } </h2>
         <h2> { data } </h2>
+
+        <h1>Form Login</h1>
+        <hr></hr>
+        <form onSubmit={sendForm} >
+          <input type='email' required placeholder='E-mail' onChange={(evt) => setEmail( evt.target.value ) } ></input>
+          <input type='password' required placeholder='Password' onChange={(evt) => setPassword( evt.target.value ) } ></input>
+          <button type='submit'>Send</button>
+        </form>
+
         { cities.map(( item, index ) => 
             <li key={index}> { item } </li>
         )}

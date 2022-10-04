@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { login } from '../services'
 
 function Login() {
 
@@ -27,7 +28,14 @@ function Login() {
         }
     },
     onSubmit:(values) => {
-        console.log("onSubmit", values);
+        login( values.email, values.password ).then( res => {
+            const user = res.data.user[0]
+            if ( user.durum ) {
+
+            } else {
+                setErrorMessage( user.mesaj )
+            }
+        })
     }
   })  
 

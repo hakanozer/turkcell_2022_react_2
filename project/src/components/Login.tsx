@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { login } from '../services'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
 
+  const navigate = useNavigate()
+  const [submitStatus, setSubmitStatus] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const validationSchema = Yup.object({
     email: Yup.string().required().email().min(5),
@@ -19,19 +22,26 @@ function Login() {
     },
     validationSchema: validationSchema,
     validate(values) {
-        if ( errors.email ) {
-            setErrorMessage(errors.email)
-        }else if ( errors.password ) {
-            setErrorMessage(errors.password)
-        }else {
-            setErrorMessage('')
+
+        if ( submitStatus ) {
+            if ( errors.email ) {
+                setErrorMessage(errors.email)
+            }else if ( errors.password ) {
+                setErrorMessage(errors.password)
+            }else {
+                setErrorMessage('')
+            }
         }
+        
     },
     onSubmit:(values) => {
         login( values.email, values.password ).then( res => {
             const user = res.data.user[0]
-            if ( user.durum ) {
-
+            const bilgiler = user.bilgiler
+            if ( user.durum && bilgiler ) {
+                const stBilgi = JSON.stringify( bilgiler )
+                sessionStorage.setItem('user', stBilgi)
+                navigate('/dashboard')
             } else {
                 setErrorMessage( user.mesaj )
             }
@@ -64,7 +74,7 @@ function Login() {
                     <input onChange={handleChange} name='remember' type="checkbox" className="form-check-input" id="exampleCheck1" />
                     <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button onClick={ ()=> setSubmitStatus(true) } type="submit" className="btn btn-primary">Submit</button>
                 </form>
             </div>
             <div className='col-sm-4'></div>

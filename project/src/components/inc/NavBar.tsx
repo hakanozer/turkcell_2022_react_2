@@ -6,6 +6,7 @@ function NavBar( item: { data: Bilgiler } ) {
 
   const userLogout = () => {
     sessionStorage.removeItem('user')
+    localStorage.removeItem('user')
     // Redirect
     window.location.href = '/'
   }

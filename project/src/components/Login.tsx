@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { encrypt } from '../util'
 
 function Login() {
-
+    
   const navigate = useNavigate()
   const [submitStatus, setSubmitStatus] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
@@ -42,8 +42,14 @@ function Login() {
             if ( user.durum && bilgiler ) {
                 const stBilgi = JSON.stringify( bilgiler )
                 const stEncrypt = encrypt(stBilgi)
+                
+                if ( values.remember === true ) {
+                    localStorage.setItem('user', stEncrypt)
+                }
+
                 sessionStorage.setItem('user', stEncrypt)
-                navigate('/dashboard')
+                const gotoUrl = localStorage.getItem('url') !== null ? localStorage.getItem('url')! : '/dashboard'
+                navigate(gotoUrl)
             } else {
                 setErrorMessage( user.mesaj )
             }
@@ -74,7 +80,7 @@ function Login() {
                 </div>
                 <div className="mb-3 form-check">
                     <input onChange={handleChange} name='remember' type="checkbox" className="form-check-input" id="exampleCheck1" />
-                    <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+                    <label className="form-check-label" htmlFor="exampleCheck1">Remember</label>
                 </div>
                 <button onClick={ ()=> setSubmitStatus(true) } type="submit" className="btn btn-primary">Submit</button>
                 </form>

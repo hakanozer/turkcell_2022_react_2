@@ -2,6 +2,11 @@ import { Bilgiler } from "./models/IUser";
 import * as CryptoJS from 'crypto-js'
 
 export const control = () => {
+    // remember control
+    const stLocal = localStorage.getItem('user')
+    if ( stLocal ) {
+        sessionStorage.setItem('user', stLocal)
+    }
     const stSession = sessionStorage.getItem('user')
     if ( stSession ) {
         try {

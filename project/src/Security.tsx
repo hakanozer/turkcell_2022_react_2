@@ -1,10 +1,14 @@
 import React from 'react'
 import { control } from './util'
-import {  Navigate } from 'react-router-dom'
+import {  Navigate, useLocation } from 'react-router-dom'
 import NavBar from './components/inc/NavBar'
 
 function Security( item: { component: JSX.Element } ) {
 
+  const location = useLocation()
+  localStorage.setItem('url', location.pathname)
+
+  
   const user = control()   
   return (
     

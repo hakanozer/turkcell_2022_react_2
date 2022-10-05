@@ -1,7 +1,7 @@
 import axios from 'axios'
+import { IProduct } from './models/IProduct'
 import { IUser } from './models/IUser'
 
-// userLogin.php?userPass=12345&face=no
 const baseURL = 'https://www.jsonbulut.com/json/'
 const ref = 'd1becef32825e5c8b0fc1b096230400b'
 const config = axios.create({
@@ -20,5 +20,13 @@ export const login = ( email:string, password: string ) => {
         face: 'no'
     }
     return config.get<IUser>('userLogin.php', { params: sendParams } )
+}
+
+// all product
+export const allProduct = () => {
+    const sendParams = {
+        start: 0
+    }
+    return config.get<IProduct>('product.php', { params: sendParams })
 }
 

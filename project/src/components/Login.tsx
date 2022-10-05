@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { login } from '../services'
 import { useNavigate } from 'react-router-dom'
+import { encrypt } from '../util'
 
 function Login() {
 
@@ -40,7 +41,8 @@ function Login() {
             const bilgiler = user.bilgiler
             if ( user.durum && bilgiler ) {
                 const stBilgi = JSON.stringify( bilgiler )
-                sessionStorage.setItem('user', stBilgi)
+                const stEncrypt = encrypt(stBilgi)
+                sessionStorage.setItem('user', stEncrypt)
                 navigate('/dashboard')
             } else {
                 setErrorMessage( user.mesaj )

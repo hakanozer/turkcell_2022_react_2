@@ -7,7 +7,7 @@ import { IOrderAction } from '../../useRedux/reducers/OrderReducer'
 import { StateType } from '../../useRedux/store'
 import { OrderType } from '../../useRedux/types/OrderType'
 
-function NavBar( item: { data: Bilgiler } ) {
+function NavBar( item: { data: Bilgiler, search: React.Dispatch<React.SetStateAction<string>> } ) {
 
   const userLogout = () => {
     sessionStorage.removeItem('user')
@@ -66,7 +66,7 @@ function NavBar( item: { data: Bilgiler } ) {
             </li>
         </ul>
         <form className="d-flex" role="search">
-            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <input onChange={(evt) => item.search(evt.target.value)} className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
             <button className="btn btn-outline-success" type="submit">Search</button>
         </form>
         </div>

@@ -7,12 +7,15 @@ import { allProduct } from '../services'
 
 function Dashboard() {
 
+  const [search, setSearch] = useState('')
   const [proArr, setProArr] = useState<ProBilgiler[]>([])
+  const [oldArr, setOldArr] = useState<ProBilgiler[]>([])
   useEffect(() => {
     toast.loading('Products Loading...')
     allProduct().then( res => {
       const arr = res.data.Products[0].bilgiler
       setProArr( arr )
+      setOldArr( arr )
       toast.dismiss()
     })
 
@@ -23,10 +26,24 @@ function Dashboard() {
     navigate('/productDetail', { state: proArr[index] } )
   }
 
+
+  useEffect(() => {
+    const lSearch = search.toLowerCase()
+    const newArr = oldArr.filter(item => 
+      item.productName?.toLowerCase().includes(lSearch) ||
+      item.brief?.toLowerCase().includes(lSearch) ||
+      item.price?.includes(lSearch)
+    )
+    setProArr( newArr )
+  },[search])
+  
    
   return (
     <>
       <h2> Products </h2>
+      <div className='mb-2 mt-2'>
+        <input onChange={(evt) => setSearch(evt.target.value)} type='search' className='form-control' placeholder='Search..' />
+      </div>
       <table className="table table-hover">
       <thead>
         <tr>

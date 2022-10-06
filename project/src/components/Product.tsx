@@ -7,6 +7,7 @@ import { StateType } from '../useRedux/store'
 function Product() {
 
   const arr = useSelector( (item: StateType) => item.OrderReducer )
+  const search = useSelector( (item: StateType) => item.SearchReducer  )
   /*
   const [arr, setArr] = useState<OrderList[]>([])
   useEffect(() => {
@@ -21,6 +22,25 @@ function Product() {
     } 
   }, [])
   */
+  
+  const [proArr, setProArr] = useState<OrderList[]>([])
+  const [oldArr, setOldArr] = useState<OrderList[]>([])
+  useEffect(() => {
+    setProArr( arr )
+    setOldArr( arr )  
+  },[])
+
+  useEffect(() => {
+    if ( search !== '' ) {
+      const lSearch = search.toLowerCase()
+      const newArr = oldArr.filter(item => 
+        item.urun_adi?.toLowerCase().includes(lSearch) ||
+        item.kisa_aciklama?.toLowerCase().includes(lSearch) ||
+        item.fiyat?.includes(lSearch)
+      )
+      setProArr( newArr )
+    }
+  }, [search])
   
 
   return (
@@ -38,7 +58,7 @@ function Product() {
       </thead>
       <tbody>
 
-      { arr.map(( item, index ) => 
+      { proArr.map(( item, index ) => 
         <tr key={index} >
           <th>{ item.id }</th>
           <td>

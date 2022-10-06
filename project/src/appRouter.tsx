@@ -19,7 +19,7 @@ export const routes =
         <Routes>
             <Route path='' element={ control() === null ? <Login/> : <Navigate to={ localStorage.getItem('url') !== null ? localStorage.getItem('url')! : '/dashboard' } replace />} ></Route>
             <Route path='/dashboard' element={  <Security component={ <Dashboard/> } />   } />
-            <Route path='/orders' element={  <Security component={ <Product/> } />   } />
+            <Route path='/orders' element={  <Security component={ <Product /> } />   } />
             <Route path='/productDetail' element={  <Security component={ <ProductDetail/> } />   } />
         </Routes>
     </BrowserRouter>

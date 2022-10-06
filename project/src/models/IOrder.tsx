@@ -1,5 +1,5 @@
 export interface IOrder {
-    orderList: OrderList[];
+    orderList: OrderList[] | boolean;
 }
 
 export interface OrderList {

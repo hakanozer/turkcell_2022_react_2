@@ -53,7 +53,8 @@ export const orders = () => {
     const user = control()
     if ( user ) {
         const sendParams = {
-            musterilerID: user.userId
+            musterilerID: user.userId,
+            random: Math.random()
         }
         return config.get<IOrder>('orderList.php', { params: sendParams })
     }else {

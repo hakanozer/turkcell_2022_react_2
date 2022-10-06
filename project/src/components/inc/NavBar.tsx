@@ -24,7 +24,7 @@ function NavBar( item: { data: Bilgiler } ) {
             <NavLink to='/dashboard' className="nav-link" aria-current="page">Dashboard</NavLink>
             </li>
             <li className="nav-item">
-            <NavLink className="nav-link" to='/product'>Product</NavLink>
+            <NavLink className="nav-link" to='/orders'>Orders</NavLink>
             </li>
             <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,7 +38,7 @@ function NavBar( item: { data: Bilgiler } ) {
             </ul>
             </li>
             <li className="nav-item">
-            <a className="nav-link disabled">{ item.data.userName + ' ' + item.data.userSurname }</a>
+            <a className="nav-link disabled">{ item.data.userName + ' ' + item.data.userSurname } - (0)</a>
             </li>
         </ul>
         <form className="d-flex" role="search">

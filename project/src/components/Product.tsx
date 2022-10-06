@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { OrderList } from '../models/IOrder'
 import { orders } from '../services'
+import { StateType } from '../useRedux/store'
 
 function Product() {
 
+  const arr = useSelector( (item: StateType) => item.OrderReducer )
+  /*
   const [arr, setArr] = useState<OrderList[]>([])
   useEffect(() => {
     const order = orders()
@@ -16,6 +20,7 @@ function Product() {
       })
     } 
   }, [])
+  */
   
 
   return (

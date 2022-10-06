@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { Bilgiler } from '../../models/IUser'
+import { orders } from '../../services'
+import { IOrderAction } from '../../useRedux/reducers/OrderReducer'
+import { StateType } from '../../useRedux/store'
+import { OrderType } from '../../useRedux/types/OrderType'
 
 function NavBar( item: { data: Bilgiler } ) {
 
@@ -10,6 +15,25 @@ function NavBar( item: { data: Bilgiler } ) {
     // Redirect
     window.location.href = '/'
   }
+
+  const dispatch = useDispatch()
+  const selector = useSelector( (item: StateType)  => item.OrderReducer )
+  useEffect(() => {
+    const order = orders()
+    if ( order ) {
+      order.then( res => {
+        const orderData = res.data.orderList
+        if ( typeof orderData !== 'boolean' ) {
+            const itemAction: IOrderAction = {
+              type: OrderType.ORDER_LIST,
+              payload: orderData
+            }
+            dispatch(itemAction)            
+        }
+      })
+    }
+  }, [])
+  
 
   return (
     <nav className="navbar navbar-expand-lg bg-light">
@@ -38,7 +62,7 @@ function NavBar( item: { data: Bilgiler } ) {
             </ul>
             </li>
             <li className="nav-item">
-            <a className="nav-link disabled">{ item.data.userName + ' ' + item.data.userSurname } - (0)</a>
+            <a className="nav-link disabled">{ item.data.userName + ' ' + item.data.userSurname } - ( { selector.length } )</a>
             </li>
         </ul>
         <form className="d-flex" role="search">

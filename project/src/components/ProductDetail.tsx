@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { ProBilgiler } from '../models/IProduct'
+import { addBasket } from '../services'
 
 function ProductDetail() {
 
@@ -19,6 +21,17 @@ function ProductDetail() {
       }
   }, [])
   
+  const fncAddBasket = ( productId: string ) => {
+    const basket = addBasket(productId)
+    if ( basket ) {
+        basket.then(res => {
+            const status = res.data.order[0].durum
+            if ( status ) {
+                toast.success('Add Basket Success')
+            }
+        })
+    }
+  }
 
   return (
     <>
@@ -33,14 +46,14 @@ function ProductDetail() {
                     
                     <div>
                         { item.images?.map( (item, index) =>
-                            <img onClick={()=> setBigImage(item.normal)  } role='button' key={index} src={ item.thumb } className='img-thumbnail m-1' />
+                            <img onClick={()=> setBigImage(item.normal)} role='button' key={index} src={ item.thumb } className='img-thumbnail m-1' />
                         )}
                     </div>
                 </div>
                 <div className='col-sm-6'>
                     <h2><span className="badge bg-secondary">{ item.price } ₺</span></h2>
                     <div className="content" dangerouslySetInnerHTML={{__html: item.description! }}></div>
-                    <button className='btn btn-success'><i className="bi bi-cart2"></i> Add Basket</button>
+                    <button onClick={() => fncAddBasket( item.productId! )} className='btn btn-success'><i className="bi bi-cart2"></i> Add Basket</button>
                 </div>
             </div>    
         </>

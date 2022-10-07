@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { ProBilgiler } from '../models/IProduct'
@@ -41,6 +42,10 @@ function Dashboard() {
    
   return (
     <>
+    <Helmet>
+        <title>Product List</title>
+        <meta name='description' content='E-Commers - Product List'></meta>
+    </Helmet>
       <AppTitle title='Products' />
       <div className='mb-2 mt-2'>
         <input onChange={(evt) => setSearch(evt.target.value)} type='search' className='form-control' placeholder='Search..' />

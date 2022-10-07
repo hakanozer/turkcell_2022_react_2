@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
 import { OrderList } from '../models/IOrder'
 import { orders } from '../services'
@@ -47,6 +48,10 @@ function Product() {
 
   return (
     <>
+    <Helmet>
+        <title>Order List</title>
+        <meta name='description' content='E-Commers - Order List'></meta>
+    </Helmet>
       <AppTitle title='Orders' />
       <table className="table table-hover">
       <thead>

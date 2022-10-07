@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import { login } from '../services'
 import { useNavigate } from 'react-router-dom'
 import { encrypt } from '../util'
+import { Helmet } from 'react-helmet'
 
 function Login() {
     
@@ -60,6 +61,10 @@ function Login() {
 
   return (
     <>
+    <Helmet>
+        <title>User Login</title>
+        <meta name='description' content='E-Commers - Login Content'></meta>
+    </Helmet>
         <div className='row'>
             <div className='col-sm-4'></div>
             <div className='col-sm-4'>

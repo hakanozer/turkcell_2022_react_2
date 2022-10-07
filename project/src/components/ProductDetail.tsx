@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -55,6 +56,10 @@ function ProductDetail() {
     <>
         { item &&
         <>
+            <Helmet>
+                <title>{ item.productName! }</title>
+                <meta name='description' content={ item.brief }></meta>
+            </Helmet>
             <AppTitle title={ item.productName! } />
             <div className='row'>
                 <div className='col-sm-6'>

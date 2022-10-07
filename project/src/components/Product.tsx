@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
 import { OrderList } from '../models/IOrder'
 import { orders } from '../services'
+import { IUserContext, UserContext } from '../UserContext'
 import { StateType } from '../useRedux/store'
 import AppTitle from './inc/AppTitle'
 
@@ -44,6 +45,16 @@ function Product() {
       setProArr( newArr )
     
   }, [arr, search])
+
+    // useContext
+    const { data, setData } = useContext(UserContext)
+    useEffect(() => {
+      const sendItem: IUserContext = {
+        title: 'Products Title',
+        color: '#fcba03'
+      }
+      setData(sendItem)
+    }, [])
   
 
   return (

@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { ProBilgiler } from '../models/IProduct'
 import { allProduct } from '../services'
+import { IUserContext, UserContext } from '../UserContext'
 import AppTitle from './inc/AppTitle'
 
 
@@ -49,6 +50,14 @@ function Dashboard() {
     searchRef.current?.classList.add('text-danger')
   }, [])
   
+  // useContext
+  const { data, setData } = useContext(UserContext)
+    const sendItem: IUserContext = {
+      title: 'Orders Title',
+      color: '#1832db'
+    }
+    setData(sendItem)
+
   
    
   return (

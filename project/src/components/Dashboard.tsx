@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { ProBilgiler } from '../models/IProduct'
 import { allProduct } from '../services'
+import AppTitle from './inc/AppTitle'
 
 
 function Dashboard() {
@@ -40,7 +41,7 @@ function Dashboard() {
    
   return (
     <>
-      <h2> Products </h2>
+      <AppTitle title='Products' />
       <div className='mb-2 mt-2'>
         <input onChange={(evt) => setSearch(evt.target.value)} type='search' className='form-control' placeholder='Search..' />
       </div>

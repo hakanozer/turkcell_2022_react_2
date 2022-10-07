@@ -6,6 +6,7 @@ import { ProBilgiler } from '../models/IProduct'
 import { addBasket, orders } from '../services'
 import { IOrderAction } from '../useRedux/reducers/OrderReducer'
 import { OrderType } from '../useRedux/types/OrderType'
+import AppTitle from './inc/AppTitle'
 
 function ProductDetail() {
 
@@ -54,7 +55,7 @@ function ProductDetail() {
     <>
         { item &&
         <>
-            <h2> { item.productName } </h2>
+            <AppTitle title={ item.productName! } />
             <div className='row'>
                 <div className='col-sm-6'>
                     <div className='mb-3'>

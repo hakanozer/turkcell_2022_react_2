@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { OrderList } from '../models/IOrder'
 import { orders } from '../services'
 import { StateType } from '../useRedux/store'
+import AppTitle from './inc/AppTitle'
 
 function Product() {
 
@@ -46,7 +47,7 @@ function Product() {
 
   return (
     <>
-      <h2>Orders</h2>
+      <AppTitle title='Orders' />
       <table className="table table-hover">
       <thead>
         <tr>
